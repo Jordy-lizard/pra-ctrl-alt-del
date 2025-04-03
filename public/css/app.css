@@ -1,5 +1,5 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);
 @charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Nunito);
 /*!
  * Bootstrap v4.6.0 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
@@ -155,14 +155,15 @@ sup {
 }
 
 a {
-    color: #3490dc;
+    color: #873749; /* Vervang met een geschikte kleur */
     text-decoration: none;
     background-color: transparent;
 }
 a:hover {
-    color: #1d68a7;
+    color: #ff6600;
     text-decoration: underline;
 }
+
 
 a:not([href]):not([class]) {
     color: inherit;
@@ -361,8 +362,10 @@ h1, h2, h3, h4, h5, h6,
 }
 
 h1, .h1 {
-    font-size: 2.25rem;
+    font-size: 2.5em;
+    font-weight: bold;
 }
+
 
 h2, .h2 {
     font-size: 1.8rem;
@@ -658,7 +661,11 @@ pre code {
 .col-4 {
     flex: 0 0 33.3333333333%;
     max-width: 33.3333333333%;
+    background-color: #f0f0f0;
+    padding: 20px;
 }
+
+
 
 .col-5 {
     flex: 0 0 41.6666666667%;
@@ -1076,6 +1083,8 @@ pre code {
     .col-md-4 {
         flex: 0 0 33.3333333333%;
         max-width: 33.3333333333%;
+        background-color: #f0f0f0; /* Pas de kleur aan naar wens */
+        padding: 20px;
     }
 
     .col-md-5 {
