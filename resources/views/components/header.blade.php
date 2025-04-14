@@ -6,4 +6,5 @@
         </a>
         {{ $introduction_text ?? '' }}
     </div>
+    <a href="{{ route('contactt.show') }}">Contact</a>
 </div>
