@@ -8,3 +8,8 @@
     </div>
     <a href="{{ route('contactt.show') }}">Contact</a>
 </div>
+<div class="language-switch" style="margin: 20px 0;">
+    <a href="{{ route('language.switch', ['lang' => 'nl']) }}" style="margin-right: 10px;">NL</a>
+    |
+    <a href="{{ route('language.switch', ['lang' => 'en']) }}" style="margin-left: 10px;">EN</a>
+</div>

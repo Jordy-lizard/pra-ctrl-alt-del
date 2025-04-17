@@ -60,3 +60,5 @@ Route::get('/generateSitemap/', [SitemapController::class, 'generate']);
 
 Route::get('/pages', [ContactController::class, 'show'])->name('contactt.show');
 Route::post('/pages', [ContactController::class, 'submit'])->name('contactt.submit');
+
+Route::get('language/{lang}', [LanguageController::class, 'switchLanguage'])->name('language.switch');

@@ -8,16 +8,20 @@ use App\Models\Manual;
 
 class BrandController extends Controller
 {
-    public function show($brand_id, $brand_slug)
+    public function index()
     {
+        // Alle merken
+        $brands = Brand::orderBy('name')->get();
 
-        $brand = Brand::findOrFail($brand_id);
-        $manuals = Manual::all()->where('brand_id', $brand_id);
+        // Top 5 populairste handleidingen op basis van aantal views
+        $popularManuals = Manual::with('brand')
+            ->orderByDesc('views')
+            ->take(5)
+            ->get();
 
-        return view('pages/manual_list', [
-            "brand" => $brand,
-            "manuals" => $manuals
+        return view('home', [
+            'brands' => $brands,
+            'popularManuals' => $popularManuals
         ]);
-
     }
 }
