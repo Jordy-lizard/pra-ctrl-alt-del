@@ -29,41 +29,50 @@
     {{-- A-Z selectie menu --}}
     <div class="brand-letter-nav" style="margin: 20px 0;">
         @foreach(range('A', 'Z') as $letter)
-            <a href="#letter-{{ $letter }}" style="margin-right: 10px;">{{ $letter }}</a>
+            <a href="javascript:void(0)" class="letter-link" data-letter="{{ $letter }}" style="margin-right: 10px;">{{ $letter }}</a>
         @endforeach
     </div>
 
-    <?php
-    $size = count($brands);
-    $columns = 3;
-    $chunk_size = ceil($size / $columns);
-    ?>
-
+    {{-- Merken lijst per letter --}}
     <div class="container">
         <div class="row">
-            @foreach($brands->chunk($chunk_size) as $chunk)
-                <div class="col-md-4">
+            @foreach(range('A', 'Z') as $letter)
+                <div id="letter-{{ $letter }}" class="brand-section col-md-12" style="display:none;">
+                    <h2>{{ $letter }}</h2>
                     <ul>
-                        @php $header_first_letter = null; @endphp
-                        @foreach($chunk as $brand)
+                        @foreach($brands as $brand)
                             @php
                                 $current_first_letter = strtoupper(substr($brand->name, 0, 1));
                             @endphp
 
-                            @if ($current_first_letter !== $header_first_letter)
-                                </ul>
-                                <h2 id="letter-{{ $current_first_letter }}">{{ $current_first_letter }}</h2>
-                                <ul>
-                                @php $header_first_letter = $current_first_letter; @endphp
+                            @if ($current_first_letter === $letter)
+                                <li>
+                                    <a href="/{{ $brand->id }}/{{ $brand->getNameUrlEncodedAttribute() }}/">{{ $brand->name }}</a>
+                                </li>
                             @endif
-
-                            <li>
-                                <a href="/{{ $brand->id }}/{{ $brand->getNameUrlEncodedAttribute() }}/">{{ $brand->name }}</a>
-                            </li>
                         @endforeach
                     </ul>
                 </div>
             @endforeach
         </div>
     </div>
+
+    {{-- JavaScript voor het tonen van de geselecteerde sectie --}}
+    <script>
+        document.querySelectorAll('.letter-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const selectedLetter = this.getAttribute('data-letter');
+
+                // Verberg alle secties
+                document.querySelectorAll('.brand-section').forEach(section => {
+                    section.style.display = 'none';
+                });
+
+                // Toon de geselecteerde sectie
+                document.getElementById('letter-' + selectedLetter).style.display = 'block';
+            });
+        });
+    </script>
+
 </x-layouts.app>
